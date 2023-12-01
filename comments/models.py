@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from posts.models import Post
+from django.db.models import Avg
 
 
 class Comment(models.Model):
@@ -12,6 +13,9 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     content = models.TextField()
+    
+
+    
 
     class Meta:
         ordering = ['-created_at']

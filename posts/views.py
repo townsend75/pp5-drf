@@ -4,7 +4,16 @@ from django_filters.rest_framework import DjangoFilterBackend
 from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Post
 from .serializers import PostSerializer
+from django.http import HttpRequest, HttpResponse
 
+
+
+# def stars(request: HttpRequest) -> HttpResponse:
+#         posts = Post.objects.all()
+#         for post in posts:
+#             rating = Rating.objects.filter().first()
+#             post.user_rating = rating.value if rating else 0
+#         return render(request, "stars", {"posts": posts}) 
 
 class PostList(generics.ListCreateAPIView):
     """
@@ -15,7 +24,9 @@ class PostList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Post.objects.annotate(
         likes_count=Count('likes', distinct=True),
-        comments_count=Count('comment', distinct=True)
+        comments_count=Count('comment', distinct=True),
+        ratings_count=Count('ratings', distinct=True)
+       
     ).order_by('-created_at')
     filter_backends = [
         filters.OrderingFilter,
@@ -35,10 +46,13 @@ class PostList(generics.ListCreateAPIView):
         'likes_count',
         'comments_count',
         'likes__created_at',
+        
     ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+       
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -49,5 +63,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Post.objects.annotate(
         likes_count=Count('likes', distinct=True),
-        comments_count=Count('comment', distinct=True)
+        comments_count=Count('comment', distinct=True),
+        ratings_count=Count('ratings', distinct=True)
+        
     ).order_by('-created_at')

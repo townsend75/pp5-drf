@@ -1,5 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Avg
+
+
+def average_rating(self) -> float:
+        return Rating.objects.filter(post=self).aggregate(Avg("rating"))["average_rating"]
 
 
 class Post(models.Model):
@@ -16,8 +21,8 @@ class Post(models.Model):
     image = models.ImageField(
         upload_to='images/', default='../default_post_rgq6aq', blank=True
     )
-
-
+    average_rating = models.PositiveIntegerField(default=0)
+    
     class Meta:
         ordering = ['-created_at']
 
