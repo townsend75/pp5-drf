@@ -7,7 +7,7 @@ class RatingSerializer(serializers.ModelSerializer):
         model = Rating
         fields = [
             'id', 'content', 'owner', 'post', 'value',
-            'created_at',
+            'created_at'
         ]
 
 class RatingDetailSerializer(RatingSerializer):

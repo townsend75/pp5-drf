@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from posts.models import Post
 from likes.models import Like
+from reviews.serializers import ReviewSerializer
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -12,6 +13,8 @@ class PostSerializer(serializers.ModelSerializer):
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
     ratings_count = serializers.ReadOnlyField()
+    reviews = ReviewSerializer(many=True, read_only=True)
+    
 
     def validate_image(self, value):
         if value.size > 2 * 1024 * 1024:
@@ -38,6 +41,8 @@ class PostSerializer(serializers.ModelSerializer):
             ).first()
             return like.id if like else None
         return None
+
+
 
     class Meta:
         model = Post

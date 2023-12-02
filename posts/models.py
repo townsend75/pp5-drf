@@ -21,7 +21,8 @@ class Post(models.Model):
     image = models.ImageField(
         upload_to='images/', default='../default_post_rgq6aq', blank=True
     )
-    average_rating = models.PositiveIntegerField(default=0)
+    avg_rating = models.FloatField(default=0)
+    number_rating = models.IntegerField(default=0)
     
     class Meta:
         ordering = ['-created_at']

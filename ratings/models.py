@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from posts.models import Post
-
+from django.db.models import Avg
 
 
 RATING_CHOICES = [
@@ -26,9 +26,11 @@ class Rating(models.Model):
     content = models.TextField(blank=True, null=True)
     value = models.PositiveIntegerField(
         choices=RATING_CHOICES, default=0)
+       
 
     class Meta:
         ordering = ['-created_at']
+        unique_together = ['owner', 'post']
 
     def __str__(self):
         return self.content
