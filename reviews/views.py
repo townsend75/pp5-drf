@@ -4,11 +4,12 @@ from rest_framework import generics, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Review
 from .serializers import ReviewSerializer
-from drf_api.permissions import IsOwnerOrReadOnly
+from drf_api.permissions import IsOwnerOrReadOnly, CustomPermission
 from posts.models import Post
 
 class ReviewCreate(generics.ListCreateAPIView):
     serializer_class = ReviewSerializer
+    permission_classes = [CustomPermission]
 
     def get_queryset(self):
         return Review.objects.all()
@@ -33,12 +34,13 @@ class ReviewCreate(generics.ListCreateAPIView):
         post.number_rating = post.number_rating + 1   
         post.save()  
 
-        serializer.save(post=post, review_user=review_user)    
+        serializer.save(post=post, review_user=review_user)  
+        print ("user hasn't posted")  
 
 
 class ReviewList(generics.ListAPIView):
         serializer_class = ReviewSerializer
-        permission_classes= [permissions.IsAuthenticatedOrReadOnly] 
+        permission_classes= [IsOwnerOrReadOnly] 
         queryset= Review.objects.all()   
 
         def get_queryset(self):

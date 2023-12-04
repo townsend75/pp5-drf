@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 from django.db.models import Avg
 
 
-def average_rating(self) -> float:
-        return Rating.objects.filter(post=self).aggregate(Avg("rating"))["average_rating"]
+# def average_rating(self) -> float:
+    # return Rating.objects.filter(post=self).aggregate(Avg("rating"))["average_rating"]
 
 
 class Post(models.Model):
