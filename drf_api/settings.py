@@ -61,7 +61,10 @@ SECRET_KEY = 'JesusHChrist719!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-townsend75-pp5drf-o62o4hfvpse.ws-eu106.gitpod.io']
+ALLOWED_HOSTS = [
+     os.environ.get('ALLOWED_HOST'),
+     '8000-townsend75-pp5drf-o62o4hfvpse.ws-eu106.gitpod.io',
+     ]
 
 
 # Application definition
