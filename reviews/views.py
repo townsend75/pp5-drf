@@ -21,21 +21,26 @@ class ReviewCreate(generics.ListCreateAPIView):
         review_user = self.request.user
         review_queryset = Review.objects.filter(post=post, review_user=review_user)
 
+        number_rating = Post.objects.get(number_rating=number_rating)
+        avg_rating = Post.objects.get(avg_rating=avg_rating).count()
+
         if review_queryset.exists():
-            raise ValidationError('You have already reviewed this post!')
+          raise ValidationError('You have already reviewed this post!')
 
 
-        if post.number_rating == 0:
-            post.avg_rating = serializer.validated_data['rating']   
+        # if number_rating == 0:
+        #     avg_rating = serializer.validated_data['rating']   
         else:
-             post.avg_rating = (post.avg_rating + serializer.validated_data['rating']/
-             (post.number_rating))   
+            avg_rating = (avg_rating + serializer.validated_data['rating']/(number_rating))
+           
+             
 
-        post.number_rating = post.number_rating + 1   
+        number_rating = number_rating + 1   
         post.save()  
 
-        serializer.save(post=post, review_user=review_user)  
-        print ("user hasn't posted")  
+        serializer.save(post=post, review_user=review_user) 
+        
+       
 
 
 class ReviewList(generics.ListAPIView):
