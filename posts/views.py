@@ -1,4 +1,4 @@
-from django.db.models import Count
+from django.db.models import Count, Avg
 from rest_framework import generics, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_api.permissions import IsOwnerOrReadOnly
@@ -8,12 +8,6 @@ from django.http import HttpRequest, HttpResponse
 
 
 
-# def stars(request: HttpRequest) -> HttpResponse:
-#         posts = Post.objects.all()
-#         for post in posts:
-#             rating = Rating.objects.filter().first()
-#             post.user_rating = rating.value if rating else 0
-#         return render(request, "stars", {"posts": posts}) 
 
 class PostList(generics.ListCreateAPIView):
     """
@@ -25,7 +19,8 @@ class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.annotate(
         likes_count=Count('likes', distinct=True),
         comments_count=Count('comment', distinct=True),
-        review_count=Count('reviews', distinct=True)
+        reviews_count=Count('reviews', distinct=True),
+        average_rating=Avg('reviews__rating')
        
        
     ).order_by('-created_at')
@@ -91,6 +86,8 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.annotate(
         likes_count=Count('likes', distinct=True),
         comments_count=Count('comment', distinct=True),
+        reviews_count=Count('reviews', distinct=True),
+        average_rating=Avg('reviews__rating')
        
         
     ).order_by('-created_at')

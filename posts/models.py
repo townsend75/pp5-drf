@@ -10,7 +10,7 @@ from django.db.models import Avg
 class Post(models.Model):
     """
     Post model, related to 'owner', i.e. a User instance.
-    Default image set so that we can always reference image.url.
+   
     """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -21,8 +21,7 @@ class Post(models.Model):
     image = models.ImageField(
         upload_to='images/', default='../default_post_rgq6aq', blank=True
     )
-    avg_rating = models.FloatField(default=0)
-    number_rating = models.IntegerField(default=0)
+    
     
     class Meta:
         ordering = ['-created_at']
