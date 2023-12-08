@@ -1,21 +1,18 @@
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from rest_framework import serializers
-from reviews.models import Review
+from .models import Contact
 
 
-class ReviewSerializer(serializers.ModelSerializer):
+class ContactSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Contact model
 
-    """ Serializer for the review model"""
-
+    """
     owner = serializers.ReadOnlyField(source="owner.username")
-    is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source="owner.profile.id")
     profile_image = serializers.ReadOnlyField(source="owner.profile.image.url")
     created_at = serializers.SerializerMethodField()
     updated_at = serializers.SerializerMethodField()
-
-    def get_is_owner(self, obj):
-        request = self.context["request"]
-        return request.user == obj.owner
 
     def get_created_at(self, obj):
         return naturaltime(obj.created_at)
@@ -24,23 +21,18 @@ class ReviewSerializer(serializers.ModelSerializer):
         return naturaltime(obj.updated_at)
 
     class Meta:
-        model = Review
+        """
+        Lists all the fields to be included in
+        the data returned by this api
+        """
+        model = Contact
         fields = [
             "id",
             "owner",
-            "is_owner",
-            'post',
+            "question",
+            "content",
             "profile_id",
             "profile_image",
             "created_at",
             "updated_at",
-            "content",
-            "rating",
         ]
-
-class ReviewDetailSerializer(ReviewSerializer):
-    """
-    Serializer for the Comment model used in Detail view
-    Post is a read only field so that we dont have to set it on each update
-    """
-    post = serializers.ReadOnlyField(source="post.id")        
