@@ -2,14 +2,6 @@ from django.db import models;
 from django.contrib.auth.models import User;
 
 
-QUESTIONS = (
-    ('LOGIN', 'Trouble logging in'),
-    ('PASSWORD', 'Forgotten password'),
-    ('REPORT', 'Report inappropriate site content'),
-    ('OTHER', 'Other reason')
-)
-
-
 class Contact(models.Model):
 
     """
@@ -18,7 +10,7 @@ class Contact(models.Model):
 
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    question = models.CharField(max_length=50, choices=QUESTIONS)
+    question = models.CharField(max_length=50)
     content = models.TextField(max_length=255, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
