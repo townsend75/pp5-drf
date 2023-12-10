@@ -13,6 +13,7 @@ class ContactSerializer(serializers.ModelSerializer):
     profile_image = serializers.ReadOnlyField(source="owner.profile.image.url")
     created_at = serializers.SerializerMethodField()
     updated_at = serializers.SerializerMethodField()
+    email = serializers.EmailField()
 
     def get_created_at(self, obj):
         return naturaltime(obj.created_at)
@@ -35,4 +36,5 @@ class ContactSerializer(serializers.ModelSerializer):
             "profile_image",
             "created_at",
             "updated_at",
+            "email",
         ]

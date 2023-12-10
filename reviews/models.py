@@ -5,7 +5,7 @@ from posts.models import Post
 
 
 class Review(models.Model):
-    review_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.IntegerField()
     content = models.TextField(max_length=200, null=True)
     post = models.ForeignKey(Post,on_delete=models.CASCADE, related_name='reviews')

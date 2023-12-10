@@ -1,5 +1,6 @@
-from rest_framework import serializers
-from reviews.models import Review
+from rest_framework import serializers;
+from reviews.models import Review;
+from django.contrib.humanize.templatetags.humanize import naturaltime
 
 
 class ReviewSerializer(serializers.ModelSerializer):
