@@ -20,7 +20,8 @@ class PostList(generics.ListCreateAPIView):
         likes_count=Count('likes', distinct=True),
         comments_count=Count('comment', distinct=True),
         reviews_count=Count('reviews', distinct=True),
-        average_rating=Avg('reviews__rating')
+        average_rating=Avg('reviews__rating', max_length=4
+        )
        
        
     ).order_by('-created_at')
