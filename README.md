@@ -239,3 +239,6 @@ This article was followed in order to implement average rating calculations in t
 
 
 
+
+
+
