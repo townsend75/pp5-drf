@@ -51,33 +51,6 @@ class PostList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-        # pk = self.kwargs.get('pk')
-        # post = Post.objects.get(pk=pk)
-
-        # review_user = Review.objects.get(review_user=review_user)
-        # review_queryset = Review.objects.filter(post=post, review_user=review_user)
-
-        # number_rating = self.objects.get(number_rating=number_rating)
-        # avg_rating = self.objects.get(avg_rating=avg_rating).count()
-
-        # # if review_queryset.exists():
-        # #   raise ValidationError('You have already reviewed this post!')
-
-
-        # # if number_rating == 0:
-        # #     avg_rating = serializer.validated_data['rating']   
-        
-        # avg_rating = (avg_rating + serializer.validated_data['rating']/(number_rating))
-           
-             
-
-        # number_rating = number_rating + 1   
-        # post.save()  
-
-        # serializer.save(post=post, review_user=review_user) 
-
-       
-
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     """
