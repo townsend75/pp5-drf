@@ -5,6 +5,7 @@ from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Post
 from .serializers import PostSerializer
 from django.http import HttpRequest, HttpResponse
+from django.db.models.functions import Round
 
 
 
@@ -20,7 +21,7 @@ class PostList(generics.ListCreateAPIView):
         likes_count=Count('likes', distinct=True),
         comments_count=Count('comment', distinct=True),
         reviews_count=Count('reviews', distinct=True),
-        average_rating= round (Avg('reviews__rating', 2
+        average_rating= Round(Avg('reviews__rating', 2
         ))
        
        
