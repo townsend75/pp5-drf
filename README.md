@@ -1,110 +1,155 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# ArtXChange API
 
-Welcome townsend75 Townsend,
+ArtXChange API is the backend service used by the [ArtXChange Application](https://pp5-frontend-4b5821b7dc88.herokuapp.com/)
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+## Development Goals
 
-## Gitpod Reminders
+The API is designed to provide a backend service for the ArtXChange front end application, so that it can perform Create, Read, Update and Delete operations through the user interface.
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+## Agile Planning
 
-`python3 -m http.server`
+The project was developed using agile methods.All stories were given labels to signify importance. The labels were Must have, Should have, Could have. The stories were completed in order of importance so as to ensure the core features were included in the project.
 
-A blue button should appear to click: _Make Public_,
+The Kanban board was created using Github projects. 
 
-Another blue button should appear to click: _Open Browser_.
+## User Stories
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+### Setup
 
-A blue button should appear to click: _Make Public_,
+- As a user i can create an account so that I can access all the features for signed in users
+- As a developer I can set up the databases necessary for the project so that I can build the app
 
-Another blue button should appear to click: _Open Browser_.
+### Posts
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+- As a user I can create posts
+- As a user I can edit and delete posts
 
-To log into the Heroku toolbelt CLI:
+### Profiles
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+- As a user i can create a profile
+- As a user I can edit my profile
+-As a developer I can provide a blank template with a default image
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+** API endpoints
 
-------
+User Story:
+As a developer I can set up the databases necessary for the project so that I can build the app
 
-## Release History
+The project was created in a virtual environment with all necessary packages installed and frozen in the requirements text.
+The setting were edited to hide any secret variables.
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+User Story: 
+As a developer I can connect with the cloudinary database so that images can be stored and uploaded
 
-**September 20 2023:** Update Python version to 3.9.17.
+A cloudinary account was linked to the project so that images can be uploaded through the account.
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+User Story:
+As a User I can create an account so that I can access all the website features
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+Django rest framework and dj-rest-auth were installed and added to the url patterns and site packages to make use of their built in authenification system.
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+Endpoint: /profiles
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+User Story:
+As a developer I can create api views so that they are available on the front end
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+Methods:
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+-POST Create a user profile
+-GET Retrieve a list of artists
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+Endpoint: /profiles/int:pk
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+Methods:
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+-GET View a single user profile
+-PUT edit a user profile
+-DELETE delete any given profile
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+User Story:
+As a developer I can create a contact model so that users can contact the site administrators
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+Endpoint: /contacts
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+Methods: 
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+-POST contact the site administrators
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+Endpoint: /contacts/int:pk
 
-------
+- GET Retrieve a single contact
+-PUT Update contact form
+- DELETE Delete contact request
 
-## FAQ about the uptime script
+User Story
+As a user I can create posts
+As a user I can edit and delete my posts so that I have full control over my information
 
-**Why have you added this script?**
+Endpoint: /posts
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+Methods:
 
-**How will this affect me?**
+-POST User to create a new post
+-GET Retrieve a list of all posts
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+Endpoint /posts/int:pk
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+Methods:
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+-GET Retrieve a single post
+-PUT Update a post
+-DELETE Delete a post
 
-**So….?**
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+## Security
 
-**Can I opt out?**
+The IsOwnerOrReadOnly class was added to ensure only the content creators can edit or delete the relevant information.
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+## Technologies
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+- Django
+Main framework for App creation
+- Django Rest Framework
+Framework used for creating the API
+-Heroku
+Used to host the application
+- Cloudinary
+Used for image hosting
+- Gitpod
+Used for writing the relevant code
+-Github
+Repository for storing code
 
-**Anything more?**
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+## Python Packages
 
----
+- dj-database-url==0.5.0
+Used to parse the DATABASE_URL connection settings
+- dj-rest-auth==2.1.9
+Authentification system
+- Django==3.2.23
+Main framework for starting the project
+- django-allauth==0.44.0
+Used for authentification
+- django-cloudinary-storage==0.3.0
+Used to connect with the cloudinary storage site
+- django-filter==23.4
+Used to filter API results in serializers
+- djangorestframework==3.14.0
+Framework used for building API endpoints
+- djangorestframework-simplejwt==4.7.2
+Used with django rest framework to create access tokens for aithentification
+- gunicorn==21.2.0
+Used for deployment of WSGI applications
+- Pillow==8.2.0
+Imaging library
+- psycopg2==2.9.9
+PostgreSQL database adaptor to allow deployed application to perform crud on the database
+- PyJWT==2.8.0
+Used to create python web tokens for authentification
 
-Happy coding!
+
+## Testing
+
+
