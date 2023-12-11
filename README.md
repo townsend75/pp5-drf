@@ -152,4 +152,90 @@ Used to create python web tokens for authentification
 
 ## Testing
 
+The APIs were tested locally during development but most testing was completed using the front end. The results can be found in [ArtXChange Application](https://pp5-frontend-4b5821b7dc88.herokuapp.com/)
+
+No problems were reported on the Gitpod Code Editor, which includes both pycodestyle and flake8
+
+## Deployment
+
+The site was created using the Gitpod code editor and pushed to the remote github repository "townsend75/pp5-drf"
+
+Throughout the project, the following codes were used to push the code to the remote app:
+
+git add - used to add files to the staging area before commitment
+
+git commit -m "commitmessage" - Commits changes to a local repository
+
+git push - pushs all commited files to the remote repository
+
+
+## Heroku Deployment
+
+The site was deployed to Heroku. The steps to deploy are as follows:
+
+- Navigate to Heroku.com and create an account
+
+- Create a new app
+
+- Enter the app name
+
+- Select region and click create
+
+- Go to the settings tab and selct the config vars
+
+- Add the following config vars:
+
+ALLOWED_HOST: 
+
+CLIENT_ORIGIN: url for the front end react application
+
+CLIENT_ORIGIN_DEV: address of the local server used to preview and test during development
+
+CLOUDINARY_URL: name of image database
+
+DATABASE_URL: link to remotely stored API databases
+
+SECRET_KEY: my secret key
+
+- Click the deploy tab
+
+- Connect the app to the github repository
+
+- Click the manual deploy button and choose the main branch
+
+- Deploy
+
+
+## Cloudinary Storage
+
+CLoudinary is a cloud based database app which allows you to remotely story images. THe method for setting up are as follows:
+
+- Create an account at cloudinary.com
+
+- Navigate to the dashboard and retrieve the unique API variable
+
+- Copy the variable into the env.py file of the app
+
+- Navigate to heroku.com and access the config vars
+
+- Add the cloudinary API variable to the config vars
+
+## Forking
+
+Forks are used to propose changes to someone else's project or to use a project as a starting point for our own project
+
+- Navigate to the GitHub repository you want to fork
+
+- On the top right, click on the fork button
+
+- This will create a duplicate of the full project in your GitHub repository
+
+
+## Credits
+
+This article was followed in order to implement average rating calculations in the corrrect way:
+
+[How to calculate average of some field in Django models and send it to rest API](https://django.fun/qa/16172/)
+
+
 

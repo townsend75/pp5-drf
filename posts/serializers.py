@@ -13,7 +13,6 @@ class PostSerializer(serializers.ModelSerializer):
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
     reviews_count = serializers.ReadOnlyField()
-    # reviews = ReviewSerializer(many=True, read_only=True)
     posts_count = serializers. ReadOnlyField()
     average_rating = serializers.ReadOnlyField()
     
