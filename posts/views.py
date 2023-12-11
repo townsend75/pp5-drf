@@ -21,7 +21,7 @@ class PostList(generics.ListCreateAPIView):
         likes_count=Count('likes', distinct=True),
         comments_count=Count('comment', distinct=True),
         reviews_count=Count('reviews', distinct=True),
-        average_rating= Round(Avg('reviews__rating', 2
+        average_rating= Round(Avg('reviews__rating'
         ))
        
        
